@@ -1,0 +1,36 @@
+AstraCraft Launcher — UI/logic rework
+
+Что изменено:
+1. Добавлен новый файл Services/Localization.cs.
+   В интерфейсе доступно 30 языков:
+   ru, en, uk, be, de, fr, es, pt, it, pl, tr, zh-Hans, zh-Hant, ja, ko,
+   ar, hi, id, vi, th, nl, sv, no, da, fi, cs, ro, hu, el, he.
+
+2. Настройки получили выбор языка.
+   Выбор сохраняется в существующее поле AppConfig.Language.
+
+3. Главный экран переработан по логике лаунчера:
+   - быстрый запуск;
+   - реальная выбранная версия;
+   - количество установленных версий;
+   - реальные папки mods/resourcepacks/shaderpacks/saves;
+   - кнопка открытия папки Minecraft.
+
+4. Убрано то, чего не должно быть в честном лаунчере:
+   - фейковый AstraCraft Pro;
+   - фейковые новости с датами;
+   - Featured Modpacks с нерабочими кнопками;
+   - вкладка Servers, которая на самом деле открывала версии;
+   - вкладка Skins, которая на самом деле открывала Bedrock;
+   - рекламная строка update.astracraft.net / Discord / Support / Website.
+
+5. Удаление файлов в библиотеке стало безопаснее:
+   кнопка теперь переносит файл/папку в .minecraft/.astracraft-trash/дата-время,
+   а не удаляет навсегда.
+
+6. Run local installer jar переименован и перенесён в Advanced.
+   Добавлено предупреждение: запускать только доверенные Fabric/Forge/Quilt installer .jar.
+
+Важно:
+- У меня в среде нет .NET SDK, поэтому я не могу выполнить dotnet build здесь.
+- Я убрал Grid.ColumnSpacing/Grid.RowSpacing и не добавлял их обратно.

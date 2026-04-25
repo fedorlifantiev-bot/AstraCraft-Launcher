@@ -1,0 +1,46 @@
+AstraCraft Launcher v3.4.0 — установщики EXE / MSI / MSIX
+
+Что добавлено:
+1. EXE-инсталлятор через Inno Setup:
+   - build_installer_inno_windows.cmd
+   - опции: ярлык на рабочем столе, ярлык в меню Пуск, запуск после установки, скачивание portable Java 21 JRE после установки.
+
+2. MSI-инсталлятор через WiX Toolset:
+   - build_installer_msi_windows.cmd
+   - Build\Build-Msi.ps1 автоматически ставит WiX CLI локально через dotnet tool install --tool-path .tools\wix wix.
+   - По умолчанию свойство INSTALLJAVA=1 включает попытку скачать Java после установки.
+   - Для отключения Java при silent install: msiexec /i AstraCraftLauncherSetup-x64.msi INSTALLJAVA=0
+
+3. MSIX-пакет через Windows SDK:
+   - build_installer_msix_windows.cmd
+   - Использует makeappx.exe и signtool.exe из Windows 10/11 SDK.
+   - Создаёт локальный сертификат AstraCraftLocalDev и экспортирует .cer в dist\cert.
+   - Для локальной установки MSIX нужно импортировать .cer в Trusted People.
+
+4. Общий сборщик:
+   - build_all_installers_windows.cmd
+   - Публикует self-contained win-x64 лаунчер и пытается собрать EXE + MSI + MSIX.
+
+5. Минимальный установленный размер 270 МБ:
+   - Build\Ensure-MinInstalledSize.ps1 создаёт reserve-файл, чтобы папка установки занимала минимум 270 МБ.
+   - Файл называется astracraft_dependency_cache.reserve.bin.
+   - Он не исполняемый, не содержит кода и нужен только под требование размера релизной установки.
+
+6. Автоподгрузка зависимостей:
+   - Лаунчер self-contained, поэтому .NET Runtime пользователю не нужен.
+   - Если Java не найдена, лаунчер сам скачивает portable Eclipse Temurin 21 JRE в LocalAppData\AstraCraftLauncher\Dependencies\Java.
+   - EXE/MSI установщики также пытаются скачать Java после установки, если включена соответствующая опция.
+   - Java можно отключить в настройках лаунчера: «Автоматически докачивать нужные зависимости».
+
+Что нужно установить на ПК разработчика для сборки:
+- .NET 8 SDK или новее.
+- Для EXE: Inno Setup 6.
+- Для MSI: интернет для установки WiX CLI через dotnet tool либо заранее установленный WiX.
+- Для MSIX: Windows 10/11 SDK с makeappx.exe и signtool.exe.
+
+Быстрые команды:
+- Только self-contained exe: publish_windows_single_exe.cmd
+- EXE-инсталлятор: build_installer_inno_windows.cmd
+- MSI: build_installer_msi_windows.cmd
+- MSIX: build_installer_msix_windows.cmd
+- Всё сразу: build_all_installers_windows.cmd

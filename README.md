@@ -1,63 +1,48 @@
-# AstraCraft-Launcher
+# AstraCraft Launcher Rebuild
 
-**AstraCraft Launcher** — это кастомный Minecraft Java лаунчер на **C# / Avalonia UI** с тёмным современным интерфейсом, поддержкой локальных профилей, установленных версий, каталога модов, ресурспаков, шейдеров и модпаков.
+Native Minecraft launcher made with **C# + Avalonia UI**. No Python, no Flutter, no WebView.
 
-> Проект не является официальным продуктом Mojang, Microsoft или Modrinth.
+## Features
 
----
+- Modern rebuilt UI from scratch.
+- Official Java Edition version catalog from Mojang/Piston manifest.
+- Installs Vanilla versions by downloading version JSON, client jar, libraries, assets and natives.
+- Launches Minecraft with offline UUID and `javaw.exe` when available.
+- Supports inherited loader profiles already installed in `.minecraft/versions`.
+- Can run local Fabric/Forge/Quilt installer `.jar` files.
+- Scans real `mods`, `shaderpacks`, `resourcepacks`, `saves` folders.
+- Bedrock tab for Minecraft for Windows folder and `minecraft://` launch.
+- Logs to `%LOCALAPPDATA%\AstraCraftLauncher\logs` and `.minecraft\logs\astracraft-launch.log`.
 
-## Возможности
+## Requirements
 
-### Minecraft-версии
+- Windows 10/11
+- .NET 8 SDK or newer to build/run from source
+- Java 17+ to run modern Minecraft
 
-- просмотр установленных версий Minecraft;
-- выбор версии прямо на главной странице;
-- запуск выбранной версии;
-- загрузка vanilla-версий Minecraft Java Edition через официальный Mojang/Piston manifest;
-- отображение выбранной версии в интерфейсе.
+## Run
 
-### Профиль игрока
+```bat
+run_dev_windows.cmd
+```
 
-- настройка никнейма;
-- live-обновление никнейма в интерфейсе;
-- сохранение профиля;
-- использование выбранного никнейма при запуске игры.
+## Publish exe
 
-### Каталог модов
+```bat
+publish_windows_single_exe.cmd
+```
 
-Встроенный раздел для поиска:
-
-- модов;
-- шейдеров;
-- ресурспаков;
-- модпаков.
-
-Поиск работает через Modrinth API, а страницы проектов открываются через `modrinth.black`.
-
-### Локализация
-
-- поддержка 30 языков;
-- переключение языка в настройках;
-- сохранение выбранного языка.
-
-### Управление файлами Minecraft
-
-Быстрый доступ к папкам:
-
-- `mods`;
-- `resourcepacks`;
-- `shaderpacks`;
-- `saves`;
-- `.minecraft`.
-
-Удалённые файлы не стираются сразу, а переносятся в безопасную папку:
+The result is:
 
 ```text
-.minecraft/.astracraft-trash/
-## Благодарности
+dist\AstraCraftLauncher\AstraCraftLauncher.exe
+```
 
-Этот проект был создан и доработан при помощи **ChatGPT**.
+## UI/logic rework v3.1
 
-ChatGPT помог с интерфейсом, структурой проекта, локализацией, поиском модов, скриптами инсталляторов и документацией.
-
-Идея проекта, тестирование, публикация и финальные решения принадлежат владельцу репозитория.
+- Added 30 language options through `Services/Localization.cs`.
+- Added a language selector in Settings; it saves to `AppConfig.Language`.
+- Reworked the home screen into real launcher functions: quick launch, installed versions, Minecraft folder and local library counts.
+- Removed fake or misleading UI: Pro promo, fake news, featured modpacks, misleading Servers/Skins tabs and fake support/status links.
+- Library deletion now moves items to `.astracraft-trash` instead of permanently deleting them.
+- Loader installer .jar action is now in Advanced and marked as trusted-file only.

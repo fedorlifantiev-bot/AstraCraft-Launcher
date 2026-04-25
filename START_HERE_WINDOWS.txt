@@ -1,0 +1,17 @@
+AstraCraft Launcher - Windows quick start
+
+1. Extract this ZIP completely. Do not run scripts from inside the ZIP window.
+2. Install .NET 8 SDK or newer.
+3. Install Java 17 or newer.
+4. Run:
+   run_dev_windows.cmd
+
+Build a standalone exe:
+   publish_windows_single_exe.cmd
+
+The exe will be created here:
+   dist\AstraCraftLauncher\AstraCraftLauncher.exe
+
+If Minecraft does not launch, open Settings -> Test Java and check:
+   %LOCALAPPDATA%\AstraCraftLauncher\logs\app.log
+   .minecraft\logs\astracraft-launch.log
