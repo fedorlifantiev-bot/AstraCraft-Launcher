@@ -1,15 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>AstraCraftLauncher</AssemblyName>
     <RootNamespace>AstraCraft</RootNamespace>
-    <Version>3.6.0</Version>
+    <Version>5.0.0</Version>
     <Authors>AstraCraft</Authors>
-    <Description>A native Minecraft launcher with localized UI, Modrinth Black discovery and installer dependency bootstrap and X-Ray helper, starter seed generator and single-player health/armor tuning.</Description>
+    <Description>AstraCraft Launcher v5.0 huge update: cross-platform Windows/Linux/macOS release with stable launch checks, Smart RAM, profiles, backups, diagnostics, support bundles and polished public release tooling.</Description>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64' or '$(RuntimeIdentifier)' == 'win-arm64'">
+    <OutputType>WinExe</OutputType>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
